@@ -59,7 +59,7 @@ Template ini masih dalam tahap pengembangan.
 Silakan modifikasi sesuai kebutuhan dan beri feedback jika ada saran.
 Terima kasih! 🙏
 
-Jika Perlu bantuan bisa chat ke nomor di bawah ini : 0858175274902
+"DISCLAIMER: Ini adalah template web bertema SDM Polri untuk keperluan edukasi/non-resmi. Bukan situs resmi Polri."
 
 ## 📝 Lisensi
 
