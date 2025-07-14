@@ -4,6 +4,21 @@ Template website sederhana untuk keperluan SDM POLRI. Cocok digunakan sebagai po
 
 ---
 
+---
+
+## 🖼️ Cuplikan Layar
+
+### 🏠 Halaman Beranda
+![Beranda](cuplikan_layarweb/screenshot-home.png)
+
+### 🔐 Halaman Login Admin
+![Login](cuplikan_layarweb/screenshot-login.png)
+
+### 📋 Dashboard Admin - Kelola Pengumuman
+![Dashboard Admin](cuplikan_layarweb/screenshot-dashboard.png)
+
+---
+
 ## 🚀 Fitur Utama
 
 - 🌐 Tampilan website informatif dan sederhana
