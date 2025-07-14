@@ -26,9 +26,10 @@ Template website sederhana untuk keperluan SDM POLRI. Cocok digunakan sebagai po
    cd template-website-polri-SDM
   ```
   npm install
-  ```  
+  ```
+   ```
   node .
-
+  ```
 🔐 Login Dashboard Admin
 Username: admin
 
@@ -40,6 +41,13 @@ Untuk mengganti username dan password, buka file server.js.
 Template ini masih dalam tahap pengembangan.
 Silakan modifikasi sesuai kebutuhan dan beri feedback jika ada saran.
 Terima kasih! 🙏
+
+## 📝 Lisensi
+
+Proyek ini dilisensikan di bawah [GNU General Public License v3.0 (GPL-3.0)](https://www.gnu.org/licenses/gpl-3.0.html).
+
+Dengan lisensi ini, Anda bebas menggunakan, memodifikasi, dan mendistribusikan ulang kode sumber ini.  
+Namun, setiap distribusi (baik original maupun modifikasi) **wajib** menyertakan kode sumber dan tetap menggunakan lisensi yang sama.
 
 
 
