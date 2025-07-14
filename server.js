@@ -6,7 +6,7 @@ const path = require("path");
 const app = express();
 const port = 3000;
 
-// Konfigurasi CORS untuk mengizinkan cookie
+
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -16,14 +16,14 @@ app.use(
   })
 );
 
-// Middleware lain
+
 app.use(express.json());
 app.set("trust proxy", 1);
 
-// --- PERUBAHAN 1: Sajikan file dari folder 'dashadmin' ---
+
 app.use(express.static(path.join(__dirname, "dashadmin")));
 
-// Konfigurasi Session
+
 app.use(
   session({
     secret: "ini-adalah-kunci-rahasia-saya-yang-sangat-aman",
@@ -36,12 +36,12 @@ app.use(
   })
 );
 
-// Penyimpanan password (hanya untuk prototipe)
+
 const plainPasswords = {
   admin: "admin123",
 };
 
-// Fungsi untuk logging
+
 const logActivity = (ip, status, username) => {
   const timestamp = new Date().toLocaleString("id-ID", {
     timeZone: "Asia/Makassar",
@@ -49,17 +49,14 @@ const logActivity = (ip, status, username) => {
   console.log(`[${timestamp}] - IP: ${ip} - ${status} - User: '${username}'`);
 };
 
-// --- PERUBAHAN 2: Tambahkan route untuk halaman utama ---
-// Saat user membuka http://localhost:3000/, kirim file login.
+
 app.get("/", (req, res) => {
   res.sendFile(
     path.join(__dirname, "admin_dashboard.html", "admin_login.html")
   );
 });
 
-// --- API Endpoints ---
 
-// Endpoint Login
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
   const ip = req.ip;
@@ -76,7 +73,7 @@ app.post("/login", (req, res) => {
   }
 });
 
-// Endpoint lain (check-session, logout) tetap sama...
+
 app.get("/check-session", (req, res) => {
   if (req.session.user) {
     res.json({ loggedIn: true, user: req.session.user });
@@ -100,7 +97,7 @@ app.post("/logout", (req, res) => {
   });
 });
 
-// Jalankan server
+
 app.listen(port, () => {
   console.log(`Server berjalan di http://localhost:${port}`);
   console.log(`Login menggunakan username 'admin' dan password 'admin123'.`);
