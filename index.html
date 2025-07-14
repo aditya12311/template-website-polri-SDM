@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="style.css" />
 
     <script>
-      // Konfigurasi Kustom Tailwind CSS
+      
       tailwind.config = {
         darkMode: "class",
         theme: {
@@ -34,7 +34,7 @@
               accent: "#FBBF24", // Emas/Amber
               light: "#F9FAFB", // Putih Gading
               "dark-bg": "#0F172A", // Biru Tua untuk latar belakang mode gelap
-              "dark-card": "#1E293B", // Kartu lebih gelap untuk mode gelap
+              "dark-card": "#1E293B", 
             },
           },
         },
@@ -621,10 +621,10 @@
     <script src="script.js" defer></script>
 
     <script>
-      // This array will hold the data from localStorage to make download possible
+      
       let allAnnouncements = [];
 
-      // Function to trigger PDF download
+      
       const downloadPdf = (id) => {
         const ann = allAnnouncements.find((a) => a.id === id);
         if (!ann) {
@@ -632,38 +632,38 @@
           return;
         }
 
-        // Create a temporary link element to trigger the download
+        
         const link = document.createElement("a");
-        link.href = ann.fileData; // The Base64 data URL
-        link.download = ann.fileName; // The original file name
+        link.href = ann.fileData; 
+        link.download = ann.fileName; 
 
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
       };
 
-      // Function to render announcements when the page loads
+      
       const renderAnnouncements = () => {
         const announcementList = document.getElementById(
           "dynamic-announcement-list"
         );
 
-        // Get data from localStorage
+        
         const announcements =
           JSON.parse(localStorage.getItem("announcements")) || [];
         allAnnouncements = announcements;
 
-        announcementList.innerHTML = ""; // Clear the list
+        announcementList.innerHTML = ""; 
 
         if (announcements.length === 0) {
           announcementList.innerHTML = `<li class="p-4 sm:p-6 text-center text-gray-500">Saat ini belum ada pengumuman.</li>`;
           return;
         }
 
-        // Sort announcements by date (newest first)
+        
         announcements.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-        // Loop through each announcement and create the HTML list item
+        
         announcements.forEach((ann) => {
           const annElement = document.createElement("li");
           annElement.className =
@@ -698,11 +698,11 @@
           announcementList.appendChild(annElement);
         });
 
-        // We need to re-run this to render the new icons
+        
         lucide.createIcons();
       };
 
-      // Call the function when the page is fully loaded
+      
       document.addEventListener("DOMContentLoaded", renderAnnouncements);
     </script>
   </body>
