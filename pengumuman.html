@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portal Rekrutmen BAG SDM Polres Klungkung - Pengumuman</title>
+    <title>Portal Rekrutmen BAG SDM Polres - Pengumuman</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
@@ -46,7 +46,7 @@
           <div class="flex items-center">
             <div class="flex-shrink-0">
               <span class="font-poppins font-bold text-lg text-white"
-                >BAG SDM POLRES KLUNGKUNG</span
+                >BAG SDM POLRES</span
               >
             </div>
           </div>
@@ -91,12 +91,10 @@
           return;
         }
 
-        // Create a temporary link element to trigger the download
         const link = document.createElement("a");
-        link.href = ann.fileData; // The Base64 data URL
-        link.download = ann.fileName; // The original file name
-
-        // Append to body, click, and then remove
+        link.href = ann.fileData; 
+        link.download = ann.fileName; 
+        
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -105,12 +103,12 @@
       document.addEventListener("DOMContentLoaded", () => {
         const publicList = document.getElementById("public-announcement-list");
 
-        // Get data from localStorage
+        
         const announcements =
           JSON.parse(localStorage.getItem("announcements")) || [];
-        allAnnouncements = announcements; // Store in global variable
+        allAnnouncements = announcements; 
 
-        publicList.innerHTML = ""; // Clear the 'loading' message
+        publicList.innerHTML = ""; 
 
         if (announcements.length === 0) {
           publicList.innerHTML =
@@ -118,10 +116,10 @@
           return;
         }
 
-        // Sort announcements by date (newest first)
+        
         announcements.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-        // Loop through each announcement and create the HTML element
+        
         announcements.forEach((ann) => {
           const annElement = document.createElement("div");
           annElement.className =
