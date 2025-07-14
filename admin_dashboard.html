@@ -11,7 +11,7 @@
     />
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
-      // Page protection using localStorage
+      
       if (localStorage.getItem("adminLoggedIn") !== "true") {
         alert("Akses ditolak! Silakan login terlebih dahulu.");
         window.location.href = "admin_login.html";
@@ -151,7 +151,7 @@
     <script>
       lucide.createIcons();
 
-      // Logout logic
+      
       document.getElementById("logout-btn").addEventListener("click", () => {
         localStorage.removeItem("adminLoggedIn");
         localStorage.removeItem("adminUsername");
@@ -159,7 +159,7 @@
         window.location.href = "admin_login.html";
       });
 
-      // Welcome message
+      
       document.addEventListener("DOMContentLoaded", () => {
         const welcomeMessage = document.getElementById("welcome-message");
         const username = localStorage.getItem("adminUsername");
@@ -169,19 +169,19 @@
           welcomeMessage.textContent = "Selamat Datang, Admin";
         }
 
-        // NEW: Load existing announcements on page load
+        
         renderAnnouncements();
       });
 
-      // --- NEW: Announcement Management Logic ---
+      
       const announcementForm = document.getElementById("announcement-form");
       const announcementList = document.getElementById("announcement-list");
 
-      // Function to render announcements from localStorage
+      
       const renderAnnouncements = () => {
         const announcements =
           JSON.parse(localStorage.getItem("announcements")) || [];
-        announcementList.innerHTML = ""; // Clear current list
+        announcementList.innerHTML = ""; 
 
         if (announcements.length === 0) {
           announcementList.innerHTML =
@@ -189,7 +189,7 @@
           return;
         }
 
-        // Sort by date descending
+        
         announcements.sort((a, b) => new Date(b.date) - new Date(a.date));
 
         announcements.forEach((ann) => {
@@ -216,10 +216,10 @@
               `;
           announcementList.appendChild(annElement);
         });
-        lucide.createIcons(); // Re-render icons after adding new elements
+        lucide.createIcons(); 
       };
 
-      // Function to delete an announcement
+      
       const deleteAnnouncement = (id) => {
         if (!confirm("Apakah Anda yakin ingin menghapus pengumuman ini?"))
           return;
@@ -231,7 +231,7 @@
         renderAnnouncements();
       };
 
-      // Handle form submission
+      
       announcementForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
@@ -244,12 +244,12 @@
           const reader = new FileReader();
           reader.onload = function (event) {
             const newAnnouncement = {
-              id: `ann-${Date.now()}`, // Unique ID
+              id: `ann-${Date.now()}`, 
               title: title,
               description: description,
               date: new Date().toISOString(),
               fileName: file.name,
-              fileData: event.target.result, // Base64 encoded PDF data
+              fileData: event.target.result, 
             };
 
             const announcements =
@@ -263,7 +263,7 @@
             renderAnnouncements();
             announcementForm.reset();
           };
-          reader.readAsDataURL(file); // Read file as Data URL (Base64)
+          reader.readAsDataURL(file); 
         }
       });
     </script>
