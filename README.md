@@ -1,6 +1,6 @@
 # 🛡️ Template Website POLRI - SDM
 
-Template website sederhana untuk keperluan SDM POLRI. Cocok digunakan sebagai portal informasi internal dengan fitur upload pengumuman melalui dashboard admin.
+Template website sederhana bertemakan SDM POLRI Ini Hanya untuk PEMBELAJARAN/NON-RESMI. Cocok digunakan sebagai portal informasi internal dengan fitur upload pengumuman melalui dashboard admin.
 
 ---
 
