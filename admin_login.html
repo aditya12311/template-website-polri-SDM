@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Panel Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              inter: ["Inter", "sans-serif"],
+              poppins: ["Poppins", "sans-serif"],
+            },
+            colors: {
+              primary: "#0D285B",
+              secondary: "#111827",
+              accent: "#FBBF24",
+              light: "#F9FAFB",
+              "dark-bg": "#0F172A",
+              "dark-card": "#1E293B",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="font-inter bg-dark-bg text-gray-200 flex items-center justify-center min-h-screen p-4"
+  >
+    <div
+      class="w-full max-w-sm p-8 space-y-6 bg-dark-card rounded-xl shadow-2xl"
+    >
+      <div class="text-center">
+        <h1 class="text-2xl font-poppins font-bold text-white">Panel Admin</h1>
+        <p class="text-gray-400 text-sm">Bag SDM Polres</p>
+      </div>
+      <div
+        id="error-message"
+        class="hidden bg-red-900/50 border border-red-700 text-red-300 px-4 py-3 rounded-md text-center text-sm"
+      ></div>
+      <form id="login-form" class="space-y-4">
+        <input
+          id="username"
+          name="username"
+          type="text"
+          required
+          class="form-input block w-full px-3 py-2 bg-gray-900/50 border border-gray-600 rounded-md focus:outline-none focus:ring-accent focus:border-accent transition"
+          placeholder="Username"
+        />
+        <input
+          id="password"
+          name="password"
+          type="password"
+          required
+          class="form-input block w-full px-3 py-2 bg-gray-900/50 border border-gray-600 rounded-md focus:outline-none focus:ring-accent focus:border-accent transition"
+          placeholder="Password"
+        />
+        <button
+          type="submit"
+          id="login-button"
+          class="w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-bold rounded-md text-secondary bg-accent hover:bg-accent/90"
+        >
+          Masuk
+        </button>
+      </form>
+    </div>
+    <script>
+      const loginForm = document.getElementById("login-form");
+      const errorMessageDiv = document.getElementById("error-message");
+      const loginButton = document.getElementById("login-button");
+      const apiUrl = "http://localhost:3000/login";
+
+      loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        loginButton.disabled = true;
+        loginButton.textContent = "Memproses...";
+        errorMessageDiv.classList.add("hidden");
+
+        const formData = new FormData(loginForm);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+          const response = await fetch(apiUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            // --- FIX: Store login state and username in localStorage ---
+            localStorage.setItem("adminLoggedIn", "true");
+            localStorage.setItem("adminUsername", data.username);
+            window.location.href = "admin_dashboard.html";
+          } else {
+            errorMessageDiv.textContent = result.message;
+            errorMessageDiv.classList.remove("hidden");
+          }
+        } catch (error) {
+          errorMessageDiv.textContent = "Tidak dapat terhubung ke server.";
+          errorMessageDiv.classList.remove("hidden");
+        } finally {
+          loginButton.disabled = false;
+          loginButton.textContent = "Masuk";
+        }
+      });
+    </script>
+  </body>
+</html>

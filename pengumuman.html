@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal Rekrutmen BAG SDM Polres Klungkung - Pengumuman</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              inter: ["Inter", "sans-serif"],
+              poppins: ["Poppins", "sans-serif"],
+            },
+            colors: {
+              primary: "#0D285B",
+              "dark-bg": "#0F172A",
+              "dark-card": "#1E293B",
+              "button-blue": "#3B82F6",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Simple styling for the navigation */
+      .nav-link {
+        @apply px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white;
+      }
+      .nav-link.active {
+        @apply bg-gray-900 text-white;
+      }
+    </style>
+  </head>
+  <body class="font-inter bg-dark-bg text-gray-200">
+    <header class="bg-dark-card shadow-md">
+      <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <span class="font-poppins font-bold text-lg text-white"
+                >BAG SDM POLRES KLUNGKUNG</span
+              >
+            </div>
+          </div>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-4">
+              <a href="#" class="nav-link">Beranda</a>
+              <a href="#" class="nav-link">Profil</a>
+              <a href="#" class="nav-link">Rekrutmen</a>
+              <a href="#" class="nav-link active">Pengumuman</a>
+              <a href="#" class="nav-link">Galeri</a>
+              <a href="#" class="nav-link">Kontak</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-poppins font-bold text-white">
+          Pengumuman Terbaru
+        </h1>
+        <p class="text-gray-400 mt-2">
+          Informasi jadwal tes dan hasil kelulusan seleksi.
+        </p>
+      </div>
+
+      <div id="public-announcement-list" class="max-w-4xl mx-auto space-y-4">
+        <p class="text-gray-500 text-center py-4">Memuat pengumuman...</p>
+      </div>
+    </main>
+
+    <script>
+      // This array will hold the data from localStorage to make download possible
+      let allAnnouncements = [];
+
+      // Function to trigger PDF download
+      const downloadPdf = (id) => {
+        const ann = allAnnouncements.find((a) => a.id === id);
+        if (!ann) {
+          alert("File tidak ditemukan!");
+          return;
+        }
+
+        // Create a temporary link element to trigger the download
+        const link = document.createElement("a");
+        link.href = ann.fileData; // The Base64 data URL
+        link.download = ann.fileName; // The original file name
+
+        // Append to body, click, and then remove
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const publicList = document.getElementById("public-announcement-list");
+
+        // Get data from localStorage
+        const announcements =
+          JSON.parse(localStorage.getItem("announcements")) || [];
+        allAnnouncements = announcements; // Store in global variable
+
+        publicList.innerHTML = ""; // Clear the 'loading' message
+
+        if (announcements.length === 0) {
+          publicList.innerHTML =
+            '<div class="bg-dark-card rounded-lg p-6 text-center text-gray-500">Saat ini belum ada pengumuman.</div>';
+          return;
+        }
+
+        // Sort announcements by date (newest first)
+        announcements.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        // Loop through each announcement and create the HTML element
+        announcements.forEach((ann) => {
+          const annElement = document.createElement("div");
+          annElement.className =
+            "bg-dark-card p-6 rounded-lg shadow-lg flex items-center justify-between transition-all hover:shadow-xl hover:ring-2 hover:ring-blue-500/50";
+
+          const displayDate = new Date(ann.date).toLocaleDateString("id-ID", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+          });
+
+          annElement.innerHTML = `
+                  <div class="flex items-center space-x-6">
+                      <div class="text-center flex-shrink-0">
+                          <p class="text-sm text-blue-400 font-semibold">${displayDate
+                            .split(" ")[1]
+                            .substring(0, 3)}</p>
+                          <p class="text-2xl font-bold text-white">${
+                            displayDate.split(" ")[0]
+                          }</p>
+                          <p class="text-sm text-gray-400">${
+                            displayDate.split(" ")[2]
+                          }</p>
+                      </div>
+                      <div class="border-l border-gray-600 pl-6">
+                          <h3 class="text-xl font-bold text-white">${
+                            ann.title
+                          }</h3>
+                          <p class="text-gray-400 mt-1">${ann.description}</p>
+                      </div>
+                  </div>
+                  <button 
+                      onclick="downloadPdf('${ann.id}')"
+                      class="inline-flex items-center px-4 py-2 bg-button-blue text-white font-semibold rounded-md hover:bg-blue-700 transition-colors flex-shrink-0">
+                      <i data-lucide="download" class="w-4 h-4 mr-2"></i>
+                      Unduh PDF
+                  </button>
+              `;
+
+          publicList.appendChild(annElement);
+        });
+
+        lucide.createIcons();
+      });
+    </script>
+  </body>
+</html>

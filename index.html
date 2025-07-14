@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal Resmi Bag SDM Polres</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <script>
+      // Konfigurasi Kustom Tailwind CSS
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              inter: ["Inter", "sans-serif"],
+              poppins: ["Poppins", "sans-serif"],
+            },
+            colors: {
+              primary: "#0D285B", // Biru Tua
+              secondary: "#111827", // Abu-abu Gelap/Hampir Hitam
+              accent: "#FBBF24", // Emas/Amber
+              light: "#F9FAFB", // Putih Gading
+              "dark-bg": "#0F172A", // Biru Tua untuk latar belakang mode gelap
+              "dark-card": "#1E293B", // Kartu lebih gelap untuk mode gelap
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+
+  <body
+    class="font-inter bg-light dark:bg-dark-bg text-gray-800 dark:text-gray-200"
+  >
+    <header
+      id="header"
+      class="bg-white/80 dark:bg-dark-bg/80 backdrop-blur-sm sticky top-0 z-50 shadow-md transition-all duration-300"
+    >
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex items-center justify-between h-20">
+          <a href="#" class="flex items-center space-x-3">
+            <img
+              src="https://placehold.co/50x50/0D285B/FFFFFF?text=P"
+              alt="Logo Polri"
+              class="h-10 w-10 rounded-full"
+            />
+            <div class="flex flex-col">
+              <span
+                class="font-poppins font-bold text-lg text-primary dark:text-white"
+                >BAG SDM</span
+              >
+              <span class="text-xs text-gray-500 dark:text-gray-400 -mt-1"
+                >POLRES
+              </span>
+            </div>
+          </a>
+
+          <div class="hidden md:flex items-center space-x-8">
+            <a
+              href="#beranda"
+              class="nav-link text-gray-700 dark:text-gray-300 hover:text-accent font-semibold active"
+              >Beranda</a
+            >
+            <a
+              href="#profil"
+              class="nav-link text-gray-700 dark:text-gray-300 hover:text-accent font-semibold"
+              >Profil</a
+            >
+            <a
+              href="#rekrutmen"
+              class="nav-link text-gray-700 dark:text-gray-300 hover:text-accent font-semibold"
+              >Rekrutmen</a
+            >
+            <a
+              href="#pengumuman"
+              class="nav-link text-gray-700 dark:text-gray-300 hover:text-accent font-semibold"
+              >Pengumuman</a
+            >
+            <a
+              href="#galeri"
+              class="nav-link text-gray-700 dark:text-gray-300 hover:text-accent font-semibold"
+              >Galeri</a
+            >
+            <a
+              href="#kontak"
+              class="nav-link text-gray-700 dark:text-gray-300 hover:text-accent font-semibold"
+              >Kontak</a
+            >
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <button
+              id="theme-toggle"
+              class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-dark-card"
+            >
+              <svg
+                id="theme-toggle-dark-icon"
+                class="hidden h-5 w-5 text-gray-600 dark:text-gray-300"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+                ></path>
+              </svg>
+              <svg
+                id="theme-toggle-light-icon"
+                class="hidden h-5 w-5 text-gray-600 dark:text-gray-300"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.121-3.536a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM10 18a1 1 0 01-1-1v-1a1 1 0 112 0v1a1 1 0 01-1 1zM5.05 14.464A1 1 0 106.465 13.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zm-1.414-3.536a1 1 0 011.414 0l.707.707a1 1 0 11-1.414 1.414l-.707-.707a1 1 0 010-1.414zM4 10a1 1 0 11-2 0v-1a1 1 0 112 0v1z"
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </button>
+            <button
+              id="mobile-menu-button"
+              class="md:hidden p-2 rounded-md hover:bg-gray-200 dark:hover:bg-dark-card"
+            >
+              <svg
+                class="h-6 w-6 text-gray-600 dark:text-gray-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                />
+              </svg>
+            </button>
+          </div>
+        </nav>
+
+        <div id="mobile-menu" class="hidden md:hidden pb-4">
+          <a
+            href="#beranda"
+            class="block py-2 px-4 text-sm hover:bg-gray-200 dark:hover:bg-dark-card rounded"
+            >Beranda</a
+          >
+          <a
+            href="#profil"
+            class="block py-2 px-4 text-sm hover:bg-gray-200 dark:hover:bg-dark-card rounded"
+            >Profil</a
+          >
+          <a
+            href="#rekrutmen"
+            class="block py-2 px-4 text-sm hover:bg-gray-200 dark:hover:bg-dark-card rounded"
+            >Rekrutmen</a
+          >
+          <a
+            href="#pengumuman"
+            class="block py-2 px-4 text-sm hover:bg-gray-200 dark:hover:bg-dark-card rounded"
+            >Pengumuman</a
+          >
+          <a
+            href="#galeri"
+            class="block py-2 px-4 text-sm hover:bg-gray-200 dark:hover:bg-dark-card rounded"
+            >Galeri</a
+          >
+          <a
+            href="#kontak"
+            class="block py-2 px-4 text-sm hover:bg-gray-200 dark:hover:bg-dark-card rounded"
+            >Kontak</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section
+        id="beranda"
+        class="relative min-h-[calc(100vh-80px)] flex items-center"
+      >
+        <div
+          class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style="
+            background-image: url('https://placehold.co/1920x1080/111827/FFFFFF?text=Gedung+Polres+');
+          "
+        ></div>
+        <div
+          class="absolute inset-0 bg-secondary opacity-70 dark:opacity-80"
+        ></div>
+        <div
+          class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center text-white"
+        >
+          <h1
+            class="font-poppins font-extrabold text-4xl md:text-5xl lg:text-6xl tracking-tight"
+          >
+            Portal Resmi <span class="text-accent">Bag SDM</span>
+          </h1>
+          <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-gray-300">
+            Informasi terdepan, transparan, dan terpercaya seputar rekrutmen
+            anggota Polri.
+          </p>
+          <div
+            class="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4"
+          >
+            <a
+              href="https://penerimaan.polri.go.id/"
+              target="_blank"
+              class="w-full sm:w-auto px-8 py-4 bg-accent text-secondary font-bold rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 btn-glow"
+            >
+              Daftar Rekrutmen
+            </a>
+            <a
+              href="#pengumuman"
+              class="w-full sm:w-auto px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-lg shadow-lg transform hover:scale-105 hover:bg-white hover:text-secondary transition-all duration-300"
+            >
+              Cek Pengumuman
+            </a>
+          </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 z-10 p-4">
+          <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+              class="bg-white/10 dark:bg-dark-bg/30 backdrop-blur-md rounded-lg p-6"
+            >
+              <div
+                class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-white text-center"
+              >
+                <div class="flex flex-col items-center">
+                  <i data-lucide="users" class="w-8 h-8 text-accent mb-2"></i>
+                  <span class="font-poppins text-3xl font-bold">1,200+</span>
+                  <span class="text-sm text-gray-300">Total Pendaftar</span>
+                </div>
+                <div class="flex flex-col items-center">
+                  <i
+                    data-lucide="user-check"
+                    class="w-8 h-8 text-accent mb-2"
+                  ></i>
+                  <span class="font-poppins text-3xl font-bold">150</span>
+                  <span class="text-sm text-gray-300">Lulus Seleksi</span>
+                </div>
+                <div class="flex flex-col items-center">
+                  <i
+                    data-lucide="calendar-days"
+                    class="w-8 h-8 text-accent mb-2"
+                  ></i>
+                  <span class="font-poppins text-3xl font-bold">3</span>
+                  <span class="text-sm text-gray-300">Jadwal Aktif</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="profil" class="py-20 bg-white dark:bg-dark-card">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2
+              class="font-poppins text-3xl font-bold text-primary dark:text-white"
+            >
+              Profil Bagian SDM
+            </h2>
+            <p class="mt-2 text-lg text-gray-600 dark:text-gray-400">
+              Mengenal lebih dekat motor penggerak sumber daya manusia
+            </p>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            <div
+              class="lg:col-span-1 bg-light dark:bg-dark-bg p-6 rounded-lg shadow-md"
+            >
+              <img
+                src="https://placehold.co/400x400/0D285B/FFFFFF?text=Foto+Kasubbag+SDM"
+                alt="Foto Kasubbag SDM"
+                class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-accent"
+              />
+              <h3
+                class="text-center font-poppins text-xl font-bold text-primary dark:text-white"
+              >
+                Sambutan Kasubbag SDM
+              </h3>
+              <p
+                class="text-center font-semibold text-gray-700 dark:text-gray-300 mb-4"
+              >
+                AKP
+              </p>
+              <p class="text-sm text-gray-600 dark:text-gray-400 text-justify">
+                "Selamat datang di portal kami. Kami berkomitmen untuk
+                menyelenggarakan proses rekrutmen yang bersih, transparan,
+                akuntabel, dan humanis untuk menjaring putra-putri terbaik
+                bangsa."
+              </p>
+            </div>
+            <div class="lg:col-span-2 space-y-8">
+              <div>
+                <h3
+                  class="font-poppins text-2xl font-bold text-primary dark:text-white mb-3 flex items-center"
+                >
+                  <i
+                    data-lucide="briefcase"
+                    class="w-6 h-6 mr-3 text-accent"
+                  ></i
+                  >Tugas dan Fungsi
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400">
+                  Bagian SDM bertugas membina dan melaksanakan fungsi manajemen
+                  bidang SDM yang meliputi penyediaan, penggunaan, perawatan,
+                  pemisahan, dan penyaluran personel, serta pembinaan psikologi
+                  personel.
+                </p>
+              </div>
+              <div>
+                <h3
+                  class="font-poppins text-2xl font-bold text-primary dark:text-white mb-3 flex items-center"
+                >
+                  <i data-lucide="network" class="w-6 h-6 mr-3 text-accent"></i
+                  >Struktur Organisasi
+                </h3>
+                <img
+                  src="https://placehold.co/800x400/E5E7EB/111827?text=Bagan+Struktur+Organisasi+Bag+SDM"
+                  alt="Struktur Organisasi"
+                  class="rounded-lg shadow-md w-full"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="rekrutmen" class="py-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2
+              class="font-poppins text-3xl font-bold text-primary dark:text-white"
+            >
+              Informasi Rekrutmen
+            </h2>
+            <p class="mt-2 text-lg text-gray-600 dark:text-gray-400">
+              Pilih jalur pengabdianmu. Temukan semua informasi yang kamu
+              butuhkan.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+              class="bg-white dark:bg-dark-card rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
+            >
+              <div class="p-6">
+                <div class="flex items-center mb-4">
+                  <div class="p-3 rounded-full bg-accent/20 mr-4">
+                    <i data-lucide="award" class="w-6 h-6 text-accent"></i>
+                  </div>
+                  <h3
+                    class="font-poppins text-xl font-bold text-primary dark:text-white"
+                  >
+                    AKPOL
+                  </h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                  Pendidikan untuk menjadi Perwira Pertama Polri dengan pangkat
+                  Inspektur Polisi Dua (IPDA).
+                </p>
+                <a href="#" class="font-semibold text-accent hover:underline"
+                  >Lihat Syarat & Berkas →</a
+                >
+              </div>
+            </div>
+            <div
+              class="bg-white dark:bg-dark-card rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
+            >
+              <div class="p-6">
+                <div class="flex items-center mb-4">
+                  <div class="p-3 rounded-full bg-accent/20 mr-4">
+                    <i data-lucide="shield" class="w-6 h-6 text-accent"></i>
+                  </div>
+                  <h3
+                    class="font-poppins text-xl font-bold text-primary dark:text-white"
+                  >
+                    BINTARA
+                  </h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                  Menjadi tulang punggung kesatuan Polri dengan pangkat Brigadir
+                  Polisi Dua (BRIPDA).
+                </p>
+                <a href="#" class="font-semibold text-accent hover:underline"
+                  >Lihat Syarat & Berkas →</a
+                >
+              </div>
+            </div>
+            <div
+              class="bg-white dark:bg-dark-card rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
+            >
+              <div class="p-6">
+                <div class="flex items-center mb-4">
+                  <div class="p-3 rounded-full bg-accent/20 mr-4">
+                    <i data-lucide="anchor" class="w-6 h-6 text-accent"></i>
+                  </div>
+                  <h3
+                    class="font-poppins text-xl font-bold text-primary dark:text-white"
+                  >
+                    TAMTAMA
+                  </h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                  Garda terdepan Polri pada satuan Brimob dan Polair dengan
+                  pangkat Bhayangkara Dua (BHARADA).
+                </p>
+                <a href="#" class="font-semibold text-accent hover:underline"
+                  >Lihat Syarat & Berkas →</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-12">
+            <a
+              href="https://penerimaan.polri.go.id/"
+              target="_blank"
+              class="bg-primary text-white font-bold py-3 px-8 rounded-lg hover:bg-opacity-90 transition-colors"
+            >
+              Kunjungi Situs Penerimaan Polri Resmi
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="pengumuman" class="py-20 bg-white dark:bg-dark-card">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2
+              class="font-poppins text-3xl font-bold text-primary dark:text-white"
+            >
+              Pengumuman Terbaru
+            </h2>
+            <p class="mt-2 text-lg text-gray-600 dark:text-gray-400">
+              Informasi jadwal tes dan hasil kelulusan seleksi.
+            </p>
+          </div>
+          <div class="max-w-4xl mx-auto">
+            <div
+              class="bg-light dark:bg-dark-bg rounded-lg shadow-md overflow-hidden"
+            >
+              <ul
+                id="dynamic-announcement-list"
+                class="divide-y divide-gray-200 dark:divide-gray-700"
+              ></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="galeri" class="py-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2
+              class="font-poppins text-3xl font-bold text-primary dark:text-white"
+            >
+              Galeri Kegiatan
+            </h2>
+            <p class="mt-2 text-lg text-gray-600 dark:text-gray-400">
+              Dokumentasi kegiatan sosialisasi dan pelaksanaan tes.
+            </p>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div class="group relative overflow-hidden rounded-lg">
+              <img
+                src="https://polresklungkung.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-11-at-11.13.33.jpeg"
+                alt="Galeri 1"
+                class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+              />
+              <div
+                class="absolute inset-0 bg-black/20 group-hover:bg-black/50 transition-colors duration-300"
+              ></div>
+            </div>
+            <div class="group relative overflow-hidden rounded-lg">
+              <img
+                src="https://jurnalpolisi.co.id/wp-content/uploads/2024/03/IMG-20240320-WA0023-2-800x500.jpg"
+                alt="Galeri 2"
+                class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+              />
+              <div
+                class="absolute inset-0 bg-black/20 group-hover:bg-black/50 transition-colors duration-300"
+              ></div>
+            </div>
+            <div class="group relative overflow-hidden rounded-lg">
+              <img
+                src="https://polresklungkung.com/wp-content/uploads/2025/02/WhatsApp-Image-2025-02-26-at-11.16.46.jpeg"
+                alt="Galeri 3"
+                class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+              />
+              <div
+                class="absolute inset-0 bg-black/20 group-hover:bg-black/50 transition-colors duration-300"
+              ></div>
+            </div>
+            <div class="group relative overflow-hidden rounded-lg">
+              <img
+                src="https://tribratanews.babel.polri.go.id/wp-content/uploads/2024/05/IMG20240521070222-scaled.jpg"
+                alt="Galeri 4"
+                class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+              />
+              <div
+                class="absolute inset-0 bg-black/20 group-hover:bg-black/50 transition-colors duration-300"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="kontak" class="py-20 bg-white dark:bg-dark-card">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2
+              class="font-poppins text-3xl font-bold text-primary dark:text-white"
+            >
+              Kontak & Lokasi
+            </h2>
+            <p class="mt-2 text-lg text-gray-600 dark:text-gray-400">
+              Hubungi kami atau kunjungi langsung untuk informasi lebih lanjut.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            <div class="space-y-6">
+              <div class="flex items-start">
+                <div
+                  class="flex-shrink-0 w-12 h-12 bg-accent/20 text-accent rounded-lg flex items-center justify-center"
+                >
+                  <i data-lucide="map-pin" class="w-6 h-6"></i>
+                </div>
+                <div class="ml-4">
+                  <h3
+                    class="text-lg font-semibold text-primary dark:text-white"
+                  >
+                    Alamat
+                  </h3>
+                  <p class="text-gray-600 dark:text-gray-400">Bali</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div
+                  class="flex-shrink-0 w-12 h-12 bg-accent/20 text-accent rounded-lg flex items-center justify-center"
+                >
+                  <i data-lucide="phone" class="w-6 h-6"></i>
+                </div>
+                <div class="ml-4">
+                  <h3
+                    class="text-lg font-semibold text-primary dark:text-white"
+                  >
+                    WhatsApp
+                  </h3>
+                  <p class="text-gray-600 dark:text-gray-400">
+                    0812-3456-7890 (Helpdesk Rekrutmen)
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div
+                  class="flex-shrink-0 w-12 h-12 bg-accent/20 text-accent rounded-lg flex items-center justify-center"
+                >
+                  <i data-lucide="mail" class="w-6 h-6"></i>
+                </div>
+                <div class="ml-4">
+                  <h3
+                    class="text-lg font-semibold text-primary dark:text-white"
+                  >
+                    Email
+                  </h3>
+                  <p class="text-gray-600 dark:text-gray-400">
+                    bagsdm@polri.go.id
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-lg overflow-hidden shadow-lg h-80 lg:h-full">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3946.804908076043!2d115.4014918152433!3d-8.52044499389953!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd211c4e0356173%3A0x1d21f3f7e1329c4a!2sPolres%20Klungkung!5e0!3m2!1sen!2sid!4v1678886543210!5m2!1sen!2sid"
+                width="100%"
+                height="100%"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              >
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="bg-secondary text-center py-8">
+        <p class="text-gray-300">Hanya untuk personel yang berwenang.</p>
+        <a
+          href="admin_login.html"
+          target="_blank"
+          class="mt-2 inline-block text-accent font-semibold hover:underline"
+        >
+          Masuk ke Panel Admin →
+        </a>
+      </div>
+    </main>
+
+    <footer class="bg-primary text-white">
+      <div class="container mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center">
+        <p>© 2025 Bagian Sumber Daya Manusia (Bag SDM) Polres.</p>
+        <p class="text-sm text-gray-400 mt-1">
+          Web ini masih dalam pengembangan saya ucapkan terimakasih sudah
+          memakai template website polres ini terimakasih.
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+
+    <script>
+      // This array will hold the data from localStorage to make download possible
+      let allAnnouncements = [];
+
+      // Function to trigger PDF download
+      const downloadPdf = (id) => {
+        const ann = allAnnouncements.find((a) => a.id === id);
+        if (!ann) {
+          alert("File tidak ditemukan!");
+          return;
+        }
+
+        // Create a temporary link element to trigger the download
+        const link = document.createElement("a");
+        link.href = ann.fileData; // The Base64 data URL
+        link.download = ann.fileName; // The original file name
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      };
+
+      // Function to render announcements when the page loads
+      const renderAnnouncements = () => {
+        const announcementList = document.getElementById(
+          "dynamic-announcement-list"
+        );
+
+        // Get data from localStorage
+        const announcements =
+          JSON.parse(localStorage.getItem("announcements")) || [];
+        allAnnouncements = announcements;
+
+        announcementList.innerHTML = ""; // Clear the list
+
+        if (announcements.length === 0) {
+          announcementList.innerHTML = `<li class="p-4 sm:p-6 text-center text-gray-500">Saat ini belum ada pengumuman.</li>`;
+          return;
+        }
+
+        // Sort announcements by date (newest first)
+        announcements.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        // Loop through each announcement and create the HTML list item
+        announcements.forEach((ann) => {
+          const annElement = document.createElement("li");
+          annElement.className =
+            "p-4 sm:p-6 hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-colors duration-200";
+
+          const displayDate = new Date(ann.date).toLocaleDateString("id-ID", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+          });
+
+          annElement.innerHTML = `
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                  <div>
+                    <p class="text-sm text-accent font-semibold">${displayDate}</p>
+                    <h3 class="text-lg font-semibold text-primary dark:text-white mt-1">
+                      ${ann.title}
+                    </h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                      ${ann.description}
+                    </p>
+                  </div>
+                  <button
+                    onclick="downloadPdf('${ann.id}')"
+                    class="mt-4 sm:mt-0 flex-shrink-0 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-opacity-90">
+                    <i data-lucide="download" class="w-4 h-4 mr-2"></i>
+                    Unduh PDF
+                  </button>
+                </div>
+              `;
+
+          announcementList.appendChild(annElement);
+        });
+
+        // We need to re-run this to render the new icons
+        lucide.createIcons();
+      };
+
+      // Call the function when the page is fully loaded
+      document.addEventListener("DOMContentLoaded", renderAnnouncements);
+    </script>
+  </body>
+</html>

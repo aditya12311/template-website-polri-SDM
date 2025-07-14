@@ -1,0 +1,30 @@
+/* Custom styles for smooth transitions and modern look */
+body {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-link {
+  position: relative;
+  transition: color 0.3s;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fbbf24; /* Gold accent */
+  transition: width 0.3s;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.btn-glow:hover {
+  box-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
+}

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      // Page protection using localStorage
+      if (localStorage.getItem("adminLoggedIn") !== "true") {
+        alert("Akses ditolak! Silakan login terlebih dahulu.");
+        window.location.href = "admin_login.html";
+      }
+    </script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              inter: ["Inter", "sans-serif"],
+              poppins: ["Poppins", "sans-serif"],
+            },
+            colors: {
+              primary: "#0D285B",
+              secondary: "#111827",
+              accent: "#FBBF24",
+              light: "#F9FAFB",
+              "dark-bg": "#0F172A",
+              "dark-card": "#1E293B",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="font-inter bg-dark-bg text-gray-200">
+    <header class="bg-dark-card shadow-md sticky top-0 z-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          <div class="flex items-center space-x-3">
+            <div
+              class="flex items-center justify-center h-10 w-10 rounded-full bg-primary"
+            >
+              <span class="font-poppins text-white text-xl font-bold">P</span>
+            </div>
+            <div>
+              <span class="font-poppins font-bold text-lg text-white"
+                >PANEL ADMIN</span
+              >
+              <span
+                id="welcome-message"
+                class="text-xs text-gray-400 -mt-1 block"
+                >Memuat...</span
+              >
+            </div>
+          </div>
+          <button
+            id="logout-btn"
+            class="inline-flex items-center px-4 py-2 border border-red-500 text-sm rounded-md text-red-500 hover:bg-red-500 hover:text-white transition-colors"
+          >
+            <i data-lucide="log-out" class="w-4 h-4 mr-2"></i>
+            Logout
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+      <div class="bg-dark-card p-6 rounded-lg shadow-lg mb-8">
+        <h2 class="text-xl font-bold mb-2">Selamat Datang di Dashboard</h2>
+        <p class="text-gray-400">
+          Anda dapat mengelola pengumuman melalui panel di bawah ini.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-1">
+          <div class="bg-dark-card p-6 rounded-lg shadow-lg">
+            <h3 class="text-lg font-bold mb-4 flex items-center">
+              <i data-lucide="plus-circle" class="w-5 h-5 mr-2"></i>
+              Tambah Pengumuman Baru
+            </h3>
+            <form id="announcement-form" class="space-y-4">
+              <div>
+                <label for="title" class="block text-sm font-medium mb-1"
+                  >Judul Pengumuman</label
+                >
+                <input
+                  type="text"
+                  id="title"
+                  required
+                  class="w-full bg-slate-800 border border-slate-600 rounded-md p-2 focus:ring-accent focus:border-accent"
+                />
+              </div>
+              <div>
+                <label for="description" class="block text-sm font-medium mb-1"
+                  >Deskripsi Singkat</label
+                >
+                <textarea
+                  id="description"
+                  rows="3"
+                  required
+                  class="w-full bg-slate-800 border border-slate-600 rounded-md p-2 focus:ring-accent focus:border-accent"
+                ></textarea>
+              </div>
+              <div>
+                <label for="pdf-file" class="block text-sm font-medium mb-1"
+                  >File PDF</label
+                >
+                <input
+                  type="file"
+                  id="pdf-file"
+                  accept=".pdf"
+                  required
+                  class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-blue-800"
+                />
+              </div>
+              <button
+                type="submit"
+                class="w-full inline-flex items-center justify-center px-4 py-2 bg-accent text-primary font-bold rounded-md hover:bg-yellow-400 transition-colors"
+              >
+                <i data-lucide="upload-cloud" class="w-4 h-4 mr-2"></i>
+                Tambah Pengumuman
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="lg:col-span-2">
+          <div class="bg-dark-card p-6 rounded-lg shadow-lg">
+            <h3 class="text-lg font-bold mb-4 flex items-center">
+              <i data-lucide="list" class="w-5 h-5 mr-2"></i>
+              Daftar Pengumuman Aktif
+            </h3>
+            <div id="announcement-list" class="space-y-4">
+              <p class="text-gray-500 text-center py-4">
+                Belum ada pengumuman.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      lucide.createIcons();
+
+      // Logout logic
+      document.getElementById("logout-btn").addEventListener("click", () => {
+        localStorage.removeItem("adminLoggedIn");
+        localStorage.removeItem("adminUsername");
+        alert("Anda berhasil logout.");
+        window.location.href = "admin_login.html";
+      });
+
+      // Welcome message
+      document.addEventListener("DOMContentLoaded", () => {
+        const welcomeMessage = document.getElementById("welcome-message");
+        const username = localStorage.getItem("adminUsername");
+        if (username) {
+          welcomeMessage.textContent = `Selamat Datang, ${username}`;
+        } else {
+          welcomeMessage.textContent = "Selamat Datang, Admin";
+        }
+
+        // NEW: Load existing announcements on page load
+        renderAnnouncements();
+      });
+
+      // --- NEW: Announcement Management Logic ---
+      const announcementForm = document.getElementById("announcement-form");
+      const announcementList = document.getElementById("announcement-list");
+
+      // Function to render announcements from localStorage
+      const renderAnnouncements = () => {
+        const announcements =
+          JSON.parse(localStorage.getItem("announcements")) || [];
+        announcementList.innerHTML = ""; // Clear current list
+
+        if (announcements.length === 0) {
+          announcementList.innerHTML =
+            '<p class="text-gray-500 text-center py-4">Belum ada pengumuman.</p>';
+          return;
+        }
+
+        // Sort by date descending
+        announcements.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        announcements.forEach((ann) => {
+          const annElement = document.createElement("div");
+          annElement.className =
+            "bg-slate-800 p-4 rounded-md flex justify-between items-center";
+          annElement.innerHTML = `
+                  <div>
+                      <p class="text-sm text-gray-400">${new Date(
+                        ann.date
+                      ).toLocaleDateString("id-ID", {
+                        day: "2-digit",
+                        month: "long",
+                        year: "numeric",
+                      })}</p>
+                      <h4 class="font-bold text-white">${ann.title}</h4>
+                      <p class="text-sm text-gray-300">${ann.description}</p>
+                  </div>
+                  <button onclick="deleteAnnouncement('${
+                    ann.id
+                  }')" class="text-red-500 hover:text-red-400">
+                      <i data-lucide="trash-2" class="w-5 h-5"></i>
+                  </button>
+              `;
+          announcementList.appendChild(annElement);
+        });
+        lucide.createIcons(); // Re-render icons after adding new elements
+      };
+
+      // Function to delete an announcement
+      const deleteAnnouncement = (id) => {
+        if (!confirm("Apakah Anda yakin ingin menghapus pengumuman ini?"))
+          return;
+
+        let announcements =
+          JSON.parse(localStorage.getItem("announcements")) || [];
+        announcements = announcements.filter((ann) => ann.id !== id);
+        localStorage.setItem("announcements", JSON.stringify(announcements));
+        renderAnnouncements();
+      };
+
+      // Handle form submission
+      announcementForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        const fileInput = document.getElementById("pdf-file");
+        const file = fileInput.files[0];
+
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            const newAnnouncement = {
+              id: `ann-${Date.now()}`, // Unique ID
+              title: title,
+              description: description,
+              date: new Date().toISOString(),
+              fileName: file.name,
+              fileData: event.target.result, // Base64 encoded PDF data
+            };
+
+            const announcements =
+              JSON.parse(localStorage.getItem("announcements")) || [];
+            announcements.push(newAnnouncement);
+            localStorage.setItem(
+              "announcements",
+              JSON.stringify(announcements)
+            );
+
+            renderAnnouncements();
+            announcementForm.reset();
+          };
+          reader.readAsDataURL(file); // Read file as Data URL (Base64)
+        }
+      });
+    </script>
+  </body>
+</html>
